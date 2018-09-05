@@ -1,2 +1,1 @@
-# ha2-hackernews
-Hacker News feed made in HyperappV2
+# [ha2-hackernews](https://stackblitz.com/edit/ha2-hackernews)
