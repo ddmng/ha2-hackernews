@@ -74,3 +74,7 @@ button.selected {
   font-size: .7em;
   height: 1.2em;
 }
+
+.bookmark {
+  cursor: pointer;
+}

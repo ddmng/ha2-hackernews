@@ -6,9 +6,10 @@ export const list = ({state, tag, title, text, onSelect}) => (
     <button 
       title={title}
       class={state.list == tag ? "selected" : ""} 
-      onClick={onSelect(tag)} 
+      onClick={ [ onSelect, {list: tag} ] } 
       disabled={state.fetching}>{text}</button>
 )
+
 
 export const refresh = ({state, onRefresh}) => (
     <button 

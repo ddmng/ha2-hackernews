@@ -485,20 +485,26 @@ var cancel = function(sub) {
   sub.cancel()
 }
 
+var isSameValue = function(a, b) {
+  if (a !== b) {
+    for (var k in merge(a, b)) {
+      if (a[k] !== b[k]) return false
+    }
+  }
+  return true
+}
+
 var isSameAction = function(a, b) {
   return (
     typeof a === typeof b &&
-    (a === b || (isArray(a) && a[0] === b[0] && a[1] === b[1]))
+    (isArray(a) && a[0] === b[0] && isSameValue(a[1], b[1]))
   )
 }
 
 var restart = function(sub, oldSub, dispatch) {
   for (var k in merge(sub, oldSub)) {
     if (k === "cancel") {
-    } else if (
-      sub[k] === oldSub[k] ||
-      (k === "action" && isSameAction(sub[k], oldSub[k]))
-    ) {
+    } else if (sub[k] === oldSub[k] || isSameAction(sub[k], oldSub[k])) {
     } else {
       cancel(oldSub)
       return start(sub, dispatch)

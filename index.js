@@ -15,8 +15,8 @@ import './styles/style.css';
 
 const FetchedStories = (state, data) => FetchArticles({
   ...state,
-  //articles: utils.toObject(utils.slice(data, state.maxNumArticles))
-  articles: utils.toObject(data)
+  articles: utils.toObject(utils.slice(data, state.maxNumArticles))
+  // articles: utils.toObject(data)
 })
 
 const FetchStories = (state) => [{
@@ -64,18 +64,22 @@ const FetchArticles = (state) => [{
   )
 ]
 
-const SetList = (list) => (state) => FetchStories({
+const SetList = ( state, {list} ) => { 
+ console.log("Selected list: ", list) 
+  return FetchStories({
   ...state,
   list: list
 })
+}
 
 const initialState = {
-  articles: [],
+  articles: {},
   status: "idle",
   autoreload: true,
   list: "new",
   maxNumArticles: 20,
-  fetching: false
+  fetching: false,
+  bookmarks: {}
 }
 
 app({
@@ -109,6 +113,8 @@ app({
           <article.view state={state} item={item} />
         )}
       </div>
+    <hr/>
+        <pre>{JSON.stringify(state, null, 2)}</pre>
     </main>
   ),
   //  <hr/>

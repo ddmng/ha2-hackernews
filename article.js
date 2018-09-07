@@ -1,6 +1,9 @@
 /** @jsx h */
 import { h, app } from './hyperapp/hav2'
 import * as http from './hyperapp/Http'
+import squirrel from './utils/squirrel'
+
+import Bookmark from './bookmark'
 
 const icon = (itemType, url) => {
   switch(itemType) {
@@ -11,7 +14,13 @@ const icon = (itemType, url) => {
     case "pollopt": return "fas fa-poll"
   }
 }
-  
+
+const bookmark = Bookmark( squirrel('bookmarks') , {} )
+
+const Bookmarked = (state) => ({
+  ...state
+}) // TODO save to local storage???
+
 export const view = ({ state, item }) => {
   if(item[1].fetched) {
     return (
@@ -24,7 +33,10 @@ export const view = ({ state, item }) => {
         </div>
         <div class="by">{item[1].by}</div>
         <div class="score">{item[1].score}</div>
-        <div class="bookmark"><i class="far fa-bookmark"></i></div>
+        <bookmark.view 
+            state={state.bookmarks} 
+            id={item[0]} 
+            callbacks={ {onBookmark: Bookmarked} } />
       </div>
     )
   } else { 
@@ -34,3 +46,4 @@ export const view = ({ state, item }) => {
   }
 }
 
+//         <div class="bookmark"><i class="far fa-bookmark"></i></div>
