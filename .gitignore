@@ -1,3 +1,5 @@
 node_modules/
 .sonarlint
 local_modules/*
+dist/
+.cache/
