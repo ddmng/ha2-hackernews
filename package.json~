@@ -2,7 +2,7 @@
 "name": "ha2-hackernews", "description": "Hacker news clone in HyperappV2", "homepage": "https://stackblitz.com/edit/ha2-hackernews", "dependencies":{
 "babel-preset-react":"^6.24.1"}
 , "version": "1.0.0", "main": "index.js", "scripts":{
-"start": "parcel index.html", "test":"echo \"Error: no test specified\" && exit 1"}
+"start": "parcel index.js", "test":"echo \"Error: no test specified\" && exit 1"}
 , "repository":{
 "type": "git", "url":"git+https://github.com/ddmng/ha2-hackernews.git"}
 , "author": "ddmng", "license": "ISC", "bugs":{

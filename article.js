@@ -1,6 +1,7 @@
 /** @jsx h */
-import { h, app } from './hyperapp/hav2'
-import * as http from './hyperapp/Http'
+import { h, app } from './local_modules/hyperapp/src/index'
+import * as fx from './local_modules/hyperapp-fx/src/index'
+
 import squirrel from './utils/squirrel'
 
 import Bookmark from './bookmark'
@@ -33,13 +34,13 @@ export const view = ({ state, item }) => {
         </div>
         <div class="by">{item[1].by}</div>
         <div class="score">{item[1].score}</div>
-        <bookmark.view 
-            state={state.bookmarks} 
-            id={item[0]} 
+        <bookmark.view
+            state={state.bookmarks}
+            id={item[0]}
             callbacks={ {onBookmark: Bookmarked} } />
       </div>
     )
-  } else { 
+  } else {
     return (
       <div class="li loading">Loading...</div>
     )

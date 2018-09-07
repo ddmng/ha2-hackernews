@@ -1,14 +1,11 @@
 /** @jsx h */
 
-import { h, app } from './hyperapp/hav2'
-import * as http from './hyperapp/Http'
-import * as batch from './hyperapp/Batch'
-import * as time from './hyperapp/Time'
-import * as logger from './hyperapp/Console'
+import { h, app } from './local_modules/hyperapp/src/index'
+import * as fx from './local_modules/hyperapp-fx/src/index'
 
 import * as utils from './utils/utils'
+import * as navs from './navs'
 import * as article from './article'
-import * as navbutton from './navbuttons'
 
 import './styles/style.css';
 
@@ -16,7 +13,6 @@ import './styles/style.css';
 const FetchedStories = (state, data) => FetchArticles({
   ...state,
   articles: utils.toObject(utils.slice(data, state.maxNumArticles))
-  // articles: utils.toObject(data)
 })
 
 const FetchStories = (state) => [{
@@ -25,7 +21,7 @@ const FetchStories = (state) => [{
     status: 'fetching stories',
     fetching: true
   },
-  http.Http({
+  fx.Http({
     url: `https://hacker-news.firebaseio.com/v0/${state.list}stories.json`,
     action: FetchedStories
   })
@@ -54,9 +50,9 @@ const FetchArticles = (state) => [{
     status: "fetching articles",
     fetching: true
   },
-  batch.BatchFx(
+  fx.BatchFx(
     ...Object.keys(state.articles).map(item =>
-      http.Http({
+      fx.Http({
         url: `https://hacker-news.firebaseio.com/v0/item/${item}.json`,
         action: FetchedArticles,
       })
@@ -64,8 +60,8 @@ const FetchArticles = (state) => [{
   )
 ]
 
-const SetList = ( state, {list} ) => { 
- console.log("Selected list: ", list) 
+const SetList = ( state, {list} ) => {
+ console.log("Selected list: ", list)
   return FetchStories({
   ...state,
   list: list
@@ -91,22 +87,7 @@ app({
         Hacker news Feed in HAv2
       </header>
       <nav>
-        <div class="lists">
-          <navbutton.list state={state} title="New stories" tag="new" text="New" onSelect={SetList}/>
-
-          <navbutton.list state={state} title="Top trending stories" tag="top" text="Top" onSelect={SetList}/>
-
-          <navbutton.list state={state} title="Best stories" tag="best" text="Best" onSelect={SetList}/>
-
-          <navbutton.list state={state} title="Ask HackerNews" tag="ask" text="AskHN" onSelect={SetList}/>
-
-          <navbutton.list state={state} title="Show HackerNews" tag="show" text="ShowHN" onSelect={SetList}/>
-
-          <navbutton.list state={state} title="Jobs list" tag="job" text="Jobs" onSelect={SetList}/>
-
-          <navbutton.refresh state={state} onRefresh={FetchStories}/>
-
-        </div>
+        <navs.view state={state} onSetList={SetList} onFetchStories={FetchStories} />
       </nav>
       <div>
         {Object.entries(state.articles).map(item =>
@@ -119,7 +100,7 @@ app({
   ),
   //  <hr/>
   //      <pre>{JSON.stringify(state, null, 2)}</pre>
-  // subscriptions: 
+  // subscriptions:
   //   (state) => console.log("STATE", state)
 
 })
