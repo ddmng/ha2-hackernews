@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h, app } from './local_modules/hyperapp/src/index'
 
-
 export default (map, callbacks = {}) => {
   const initial = { data: [] }
 

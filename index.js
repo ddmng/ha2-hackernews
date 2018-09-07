@@ -7,8 +7,6 @@ import * as utils from './utils/utils'
 import * as navs from './navs'
 import * as article from './article'
 
-import './styles/style.css';
-
 
 const FetchedStories = (state, data) => FetchArticles({
   ...state,
