@@ -75,6 +75,7 @@ button.selected {
   height: 1.2em;
 }
 
-.bookmark {
+.li>div.bookmark {
+  color: #87FF65;
   cursor: pointer;
 }

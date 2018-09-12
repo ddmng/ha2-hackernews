@@ -6,13 +6,16 @@ import squirrel from './utils/squirrel'
 
 import Bookmark from './bookmark'
 
+
 const icon = (itemType, url) => {
+  console.log("icon: ", itemType)
   switch(itemType) {
     case "job": return "fas fa-building"
     case "story": return !url?"fas fa-question":"fas fa-book-open"
     case "comment": return "fas fa-comments"
     case "poll": return "fas fa-poll"
     case "pollopt": return "fas fa-poll"
+    default: return "fas fa-question"
   }
 }
 
