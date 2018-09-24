@@ -100,7 +100,9 @@ app({
       <hr />
       <pre>{JSON.stringify(state, null, 2)}</pre>
     </main>
-  )
+  ),
+  subscriptions:
+    (state) => console.log("STATE", state)
   //  <hr/>
   //      <pre>{JSON.stringify(state, null, 2)}</pre>
   // subscriptions:

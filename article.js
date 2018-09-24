@@ -25,9 +25,36 @@ const icon = (itemType, url) => {
 
 const bookmark = Bookmark(squirrel("bookmarks"), {});
 
-const Bookmarked = state => ({
-  ...state
-}); // TODO save to local storage???
+const saveBookmark = (props, dispatch) => {
+  console.log("props", props)
+
+  localStorage.setItem('bookmarks', JSON.stringify(props.bookmarks) )
+
+  dispatch(props.action)
+}
+
+const BookmarkSaved = (state) => ({
+  ...state,
+  status: "bookmark_saved"
+})
+
+const SaveBookmarkEffect = (props) => ({
+  effect: saveBookmark,
+  action: props.action,
+  id: props.id,
+  bookmarks: props.bookmarks
+}) 
+
+const SaveBookmark = ({id}) => (state) => [({
+  ...state,
+}),
+  SaveBookmarkEffect({
+    action: BookmarkSaved,
+    id,
+    bookmarks: state.bookmarks
+  })
+]
+
 
 export const view = ({ state, item }) => {
   if (item[1].fetched) {
@@ -46,7 +73,7 @@ export const view = ({ state, item }) => {
         <bookmark.view
           state={state.bookmarks}
           id={item[0]}
-          callbacks={{ onBookmark: Bookmarked }}
+          callbacks={{ onBookmark: SaveBookmark({id: item[0]}) }}
         />
       </div>
     );
