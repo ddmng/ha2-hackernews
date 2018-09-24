@@ -3,6 +3,7 @@ body {
   background: #2A2B2E;
   color: #5A5A66;
 }
+
 header {
   font-size: 2em;
   color: #ACEB98;
@@ -21,6 +22,7 @@ a {
   justify-content: flex-start;
   margin-bottom: 20px;
 }
+
 .lists>button {
   border: 1px solid #5A5A66;
   background: #2A2B2E;
@@ -58,7 +60,7 @@ button.selected {
   margin: 5px;
 }
 
-.li>div.score{
+.li>div.score {
   border: 1px solid #5A5A66;
   border-radius: 4px;
   background: #87FF65;
@@ -67,7 +69,7 @@ button.selected {
   height: 1.2em;
 }
 
-.li>div.by{
+.li>div.by {
   border: 1px solid #5A5A66;
   border-radius: 4px;
   padding: 2px;

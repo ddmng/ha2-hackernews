@@ -1,32 +1,33 @@
 /** @jsx h */
 
-import { h, app } from './local_modules/hyperapp/src/index'
-import * as fx from './local_modules/hyperapp-fx/src/index'
+import { h, app } from "./local_modules/hyperapp/src/index";
+import * as fx from "./local_modules/hyperapp-fx/src/index";
 
-import * as utils from './utils/utils'
-import * as navs from './navs'
-import * as article from './article'
+import * as utils from "./utils/utils";
+import * as navs from "./navs";
+import * as article from "./article";
 
-import "@fortawesome/fontawesome-free/css/all.css"
-import "./styles/style.css"
+import "@fortawesome/fontawesome-free/css/all.css";
+import "./styles/style.css";
 
+const FetchedStories = (state, data) =>
+  FetchArticles({
+    ...state,
+    articles: utils.toObject(utils.slice(data, state.maxNumArticles))
+  });
 
-const FetchedStories = (state, data) => FetchArticles({
-  ...state,
-  articles: utils.toObject(utils.slice(data, state.maxNumArticles))
-})
-
-const FetchStories = (state) => [{
+const FetchStories = state => [
+  {
     ...state,
     articles: {},
-    status: 'fetching stories',
+    status: "fetching stories",
     fetching: true
   },
   fx.Http({
     url: `https://hacker-news.firebaseio.com/v0/${state.list}stories.json`,
     action: FetchedStories
   })
-]
+];
 
 const FetchedArticles = (state, data) => ({
   ...state,
@@ -38,15 +39,15 @@ const FetchedArticles = (state, data) => ({
       fetched: true,
       by: data.by,
       score: data.score,
-      title:
-      data.title,
+      title: data.title,
       type: data.type,
       url: data.url
     }
   }
-})
+});
 
-const FetchArticles = (state) => [{
+const FetchArticles = state => [
+  {
     ...state,
     status: "fetching articles",
     fetching: true
@@ -55,18 +56,18 @@ const FetchArticles = (state) => [{
     ...Object.keys(state.articles).map(item =>
       fx.Http({
         url: `https://hacker-news.firebaseio.com/v0/item/${item}.json`,
-        action: FetchedArticles,
+        action: FetchedArticles
       })
     )
   )
-]
+];
 
-const SetList = ( state, {list} ) => {
+const SetList = (state, { list }) => {
   return FetchStories({
-  ...state,
-  list: list
-})
-}
+    ...state,
+    list: list
+  });
+};
 
 const initialState = {
   articles: {},
@@ -76,32 +77,32 @@ const initialState = {
   maxNumArticles: 20,
   fetching: false,
   bookmarks: {}
-}
+};
 
 app({
   init: FetchStories(initialState),
   container: document.querySelector("body"),
   view: state => (
     <main>
-      <header>
-        Hacker news Feed in HAv2
-      </header>
+      <header>Hacker news Feed in HAv2</header>
       <nav>
-        <navs.view state={state} onSetList={SetList} onFetchStories={FetchStories} />
+        <navs.view
+          state={state}
+          onSetList={SetList}
+          onFetchStories={FetchStories}
+        />
       </nav>
       <div>
-        {Object.entries(state.articles).map(item =>
+        {Object.entries(state.articles).map(item => (
           <article.view state={state} item={item} />
-        )}
+        ))}
       </div>
-    <hr/>
-        <pre>{JSON.stringify(state, null, 2)}</pre>
+      <hr />
+      <pre>{JSON.stringify(state, null, 2)}</pre>
     </main>
-  ),
+  )
   //  <hr/>
   //      <pre>{JSON.stringify(state, null, 2)}</pre>
   // subscriptions:
   //   (state) => console.log("STATE", state)
-
-})
-
+});
