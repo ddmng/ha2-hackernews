@@ -8,7 +8,6 @@ import Bookmark from './bookmark'
 
 
 const icon = (itemType, url) => {
-  console.log("icon: ", itemType)
   switch(itemType) {
     case "job": return "fas fa-building"
     case "story": return !url?"fas fa-question":"fas fa-book-open"

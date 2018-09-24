@@ -62,7 +62,6 @@ const FetchArticles = (state) => [{
 ]
 
 const SetList = ( state, {list} ) => {
- console.log("Selected list: ", list)
   return FetchStories({
   ...state,
   list: list
