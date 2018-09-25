@@ -5,6 +5,7 @@ import * as fx from "/local_modules/hyperapp-fx/src";
 import squirrel from "./utils/squirrel";
 
 import Bookmark from "./bookmark";
+import {SaveLocalStorageEffect} from './fx/LocalStorage'
 
 const icon = (itemType, url) => {
   switch (itemType) {
@@ -25,36 +26,21 @@ const icon = (itemType, url) => {
 
 const bookmark = Bookmark(squirrel("bookmarks"), {});
 
-const saveBookmark = (props, dispatch) => {
-  console.log("props", props)
-
-  localStorage.setItem('bookmarks', JSON.stringify(props.bookmarks) )
-
-  dispatch(props.action)
-}
-
 const BookmarkSaved = (state) => ({
   ...state,
   status: "bookmark_saved"
 })
 
-const SaveBookmarkEffect = (props) => ({
-  effect: saveBookmark,
-  action: props.action,
-  id: props.id,
-  bookmarks: props.bookmarks
-}) 
 
-const SaveBookmark = ({id}) => (state) => [({
+const SaveBookmark = (state) => [({
   ...state,
 }),
-  SaveBookmarkEffect({
+  SaveLocalStorageEffect({
     action: BookmarkSaved,
-    id,
-    bookmarks: state.bookmarks
+    bookmarks: state.bookmarks,
+    key: 'ha2-bookmarks'
   })
 ]
-
 
 export const view = ({ state, item }) => {
   if (item[1].fetched) {
@@ -73,7 +59,7 @@ export const view = ({ state, item }) => {
         <bookmark.view
           state={state.bookmarks}
           id={item[0]}
-          callbacks={{ onBookmark: SaveBookmark({id: item[0]}) }}
+          callbacks={{ onBookmark: SaveBookmark }}
         />
       </div>
     );
@@ -81,5 +67,3 @@ export const view = ({ state, item }) => {
     return <div class="li loading">Loading...</div>;
   }
 };
-
-//         <div class="bookmark"><i class="far fa-bookmark"></i></div>
