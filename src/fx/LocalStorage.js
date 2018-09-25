@@ -1,5 +1,10 @@
 const saveLocalStorage = (props, dispatch) => {
-    localStorage.setItem(props.key, JSON.stringify(props.bookmarks))
+    try {
+       localStorage.setItem(props.key, JSON.stringify(props.bookmarks))
+    } catch (e) {
+        dispatch(props.error, e)
+        return
+    }
 
     dispatch(props.action)
 }
@@ -10,12 +15,21 @@ export const SaveLocalStorageEffect = (props) => ({
 })
 
 const loadLocalStorage = (props, dispatch) => {
-    const data = JSON.stringify(localStorage.getItem(props.key))
+    let data = localStorage.getItem(props.key)
+
+    if(props['toObject'] && props.toObject === true) {
+        try {
+            data = JSON.parse(data)
+        } catch (e) {
+            dispatch(props.error, e)
+            return
+        }
+    }
     
     dispatch(props.action, {data})
 }
 
 export const LoadLocalStorageEffect = (props) => ({
+    ...props,
     effect: loadLocalStorage,
-    action: props.action,
 })

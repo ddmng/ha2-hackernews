@@ -10,6 +10,7 @@ import * as utils from "./utils/utils";
 import * as navs from "./navs";
 import * as article from "./article";
 
+import { LoadLocalStorageEffect } from "./fx/LocalStorage";
 
 const FetchedStories = (state, data) =>
   FetchArticles({
@@ -77,8 +78,27 @@ const initialState = {
   list: "new",
   maxNumArticles: 20,
   fetching: false,
-  bookmarks: {}
+  bookmarks: {},
+  init: true
 };
+
+const BookmarksLoaded = (state, { data }) => ({
+  ...state,
+  bookmarks: data,
+  init: false
+});
+
+const LoadBookmarks = state => [
+  {
+    ...state,
+    status: "loading_bookmarks"
+  },
+  LoadLocalStorageEffect({
+    action: BookmarksLoaded,
+    key: "ha2-bookmarks",
+    toObject: true
+  })
+];
 
 app({
   init: FetchStories(initialState),
@@ -98,12 +118,17 @@ app({
           <article.view state={state} item={item} />
         ))}
       </div>
+
       <hr />
       <pre>{JSON.stringify(state, null, 2)}</pre>
     </main>
   ),
   subscriptions:
-    (state) => console.log("STATE", state)
+    state => [
+      console.log("STATE", state),
+      state.init && fx.Time({now: true, action: LoadBookmarks})
+    ]
+  
   //  <hr/>
   //      <pre>{JSON.stringify(state, null, 2)}</pre>
   // subscriptions:

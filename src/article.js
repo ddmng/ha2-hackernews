@@ -26,17 +26,18 @@ const icon = (itemType, url) => {
 
 const bookmark = Bookmark(squirrel("bookmarks"), {});
 
-const BookmarkSaved = (state) => ({
+const BookmarksSaved = (state) => ({
   ...state,
   status: "bookmark_saved"
 })
 
 
-const SaveBookmark = (state) => [({
+const SaveBookmarks = (state) => [({
   ...state,
+  status: "saving_bookmarks"
 }),
   SaveLocalStorageEffect({
-    action: BookmarkSaved,
+    action: BookmarksSaved,
     bookmarks: state.bookmarks,
     key: 'ha2-bookmarks'
   })
@@ -59,7 +60,7 @@ export const view = ({ state, item }) => {
         <bookmark.view
           state={state.bookmarks}
           id={item[0]}
-          callbacks={{ onBookmark: SaveBookmark }}
+          callbacks={{ onBookmark: SaveBookmarks }}
         />
       </div>
     );
