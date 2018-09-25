@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, app } from "./local_modules/hyperapp/src/index";
+import { h, app } from "/local_modules/hyperapp/src";
 
 export default (map, callbacks = {}) => {
   const initial = { data: [] };

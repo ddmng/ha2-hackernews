@@ -1,14 +1,15 @@
 /** @jsx h */
 
-import { h, app } from "./local_modules/hyperapp/src/index";
-import * as fx from "./local_modules/hyperapp-fx/src/index";
+import { h, app } from "/local_modules/hyperapp/src";
+import * as fx from "/local_modules/hyperapp-fx/src";
+
+import "@fortawesome/fontawesome-free/css/all.css";
+import "../styles/style.scss";
 
 import * as utils from "./utils/utils";
 import * as navs from "./navs";
 import * as article from "./article";
 
-import "@fortawesome/fontawesome-free/css/all.css";
-import "./styles/style.css";
 
 const FetchedStories = (state, data) =>
   FetchArticles({

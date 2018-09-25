@@ -1,5 +1,5 @@
-import { h, app } from "./local_modules/hyperapp/src/index";
-import * as fx from "./local_modules/hyperapp-fx/src/index";
+import { h, app } from "/local_modules/hyperapp/src";
+import * as fx from "/local_modules/hyperapp-fx/src";
 
 import * as navbutton from "./navbuttons";
 
