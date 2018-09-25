@@ -84,7 +84,7 @@ const initialState = {
 
 const BookmarksLoaded = (state, { data }) => ({
   ...state,
-  bookmarks: data,
+  bookmarks: data || [],
   init: false
 });
 

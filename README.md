@@ -4,6 +4,8 @@ This is yet another Ycombinator news clone, made in [Hyperapp](https://github.co
 
 Features the 6 feeds provided by HN (new, top, best, ask, show and jobs) and allows to set bookmarks; bookmarks are saved in browser's LocalStorage.
 
+Published at: https://ha2-hackernews.netlify.com/
+
 TODO List:
 
 * [x] load feeds
@@ -13,3 +15,7 @@ TODO List:
 * [ ] pagination
 * [ ] load contents without URL in a collapsable box between the lines
 * [ ] login && upvote??? --> see if there's an API for these
+
+### Build & develop
+
+To start working, just clone the repo, run `npm install` and start it with `npm start`.
