@@ -119,8 +119,6 @@ app({
         ))}
       </div>
 
-      <hr />
-      <pre>{JSON.stringify(state, null, 2)}</pre>
     </main>
   ),
   subscriptions:
@@ -129,6 +127,8 @@ app({
       state.init && fx.Time({now: true, action: LoadBookmarks})
     ]
   
+  // <hr />
+  //  <pre>{JSON.stringify(state, null, 2)}</pre>
   //  <hr/>
   //      <pre>{JSON.stringify(state, null, 2)}</pre>
   // subscriptions:
