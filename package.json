@@ -15,9 +15,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "$(npm bin)/parcel index.html",
+    "build": "$(npm bin)/parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -39,6 +38,7 @@
     "cssnano": "^4.1.1",
     "eslint": "^5.4.0",
     "eslint-plugin-promise": "^4.0.0",
-    "node-sass": "^4.9.3"
+    "node-sass": "^4.9.3",
+    "parcel-bundler": "^1.9.7"
   }
 }
