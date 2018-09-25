@@ -1,20 +1,45 @@
 /* HA2-HACKERNEWS styles */
 
+$color1: #2A2B2E;
+$color2: #5A5A66;
+$color3: #A4C2A8;
+$color4: #ACEB98;
+$color5: #87FF65;
+
+$bgcolor: $color1;
+$textcolor: $color2;
+$linkcolor: $color3;
+
+$headercolor: $color4;
+$headerfontsize: 2em;
+
+$buttonbordercolor: $textcolor;
+$buttonbgcolor: $bgcolor;
+$buttonbgcolorselected: $color5;
+$buttontextcolor: $textcolor;
+
+$scorebordercolor: $textcolor;
+$scorebgcolor: $color5;
+
+$bybordercolor: $textcolor;
+$bookmarktextcolor: $color5;
+
+ 
 body {
   font-family: Lato;
-  background: #2A2B2E;
-  color: #5A5A66;
+  background: $bgcolor;
+  color: $textcolor;
 }
 
 header {
-  font-size: 2em;
-  color: #ACEB98;
+  font-size: $headerfontsize;
+  color: $headercolor;
   margin-bottom: 20px;
 }
 
 a {
   text-decoration: none;
-  color: #A4C2A8;
+  color: $linkcolor;
 }
 
 .lists {
@@ -25,9 +50,9 @@ a {
   margin-bottom: 20px;
 
   &>button {
-    border: 1px solid #5A5A66;
-    background: #2A2B2E;
-    color: #5A5A66;
+    border: 1px solid $buttonbordercolor;
+    background: $buttonbgcolor;
+    color: $buttontextcolor;
     padding: 10px;
     cursor: pointer;
     margin-left: 5px;
@@ -39,8 +64,8 @@ a {
 }
 
 button.selected {
-  background: #87FF65;
-  color: #2A2B2E;
+  background: $buttonbgcolorselected;
+  color: $textcolor;
 }
 
 .li {
@@ -56,16 +81,16 @@ button.selected {
   }
 
   &>div.score {
-    border: 1px solid #5A5A66;
+    border: 1px solid $scorebordercolor;
     border-radius: 4px;
-    background: #87FF65;
+    background: $scorebgcolor;
     padding: 2px;
     font-size: .7em;
     height: 1.2em;
   }
 
   &>div.by {
-    border: 1px solid #5A5A66;
+    border: 1px solid $bybordercolor;
     border-radius: 4px;
     padding: 2px;
     font-size: .7em;
@@ -73,7 +98,7 @@ button.selected {
   }
 
   &>div.bookmark {
-    color: #87FF65;
+    color: $bookmarktextcolor;
     cursor: pointer;
   }
 }
